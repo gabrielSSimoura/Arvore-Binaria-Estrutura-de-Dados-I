@@ -4,5 +4,3 @@ compile: gabrielSimoura.c arv.c
 clean:
 	rm -f *.o a.out core main
 
-run: 
-	valgrind --leak-check=full --show-leak-kinds=all ./main -s

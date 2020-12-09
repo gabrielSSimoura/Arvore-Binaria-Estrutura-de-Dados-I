@@ -18,6 +18,14 @@ Arvore *preencherArvore(Arvore *arvore, char *expressao);
 */
 float ResultadoExpressao(Arvore *arvore);
 
+/*Imprime resultado;
+ *inputs: arquivo de saida, float resultado;
+ *outputs: void ;
+ *pré-condição: arquivo aberto;
+ *pós-condição: resultado não modificado;
+*/
+void ImprimeResultado(FILE *fileSaida, float resultado);
+
 int main(int argc, char const *argv[])
 {
     FILE *fileEntrada = fopen("entrada.txt", "r");
@@ -52,7 +60,7 @@ int main(int argc, char const *argv[])
 
         //Calculando e imprimindo resultado da equação;
         resultado = ResultadoExpressao(arvore);
-        fprintf(fileSaida, "%.2f\n", resultado);
+        ImprimeResultado(fileSaida, resultado);
 
         //Liberando espaço de memória da arvore;
         arvore = liberaArvore(arvore);
@@ -86,4 +94,24 @@ float ResultadoExpressao(Arvore *arvore)
     resultado = calculaEquacao(arvore);
 
     return resultado;
+}
+
+void ImprimeResultado(FILE *fileSaida, float resultado)
+{
+    float aux1;
+    int aux2;
+
+    aux1 = resultado;
+    aux2 = resultado;
+
+    if (aux1 - aux2 == 0.0)
+    {
+        fprintf(fileSaida, "%d\n", aux2);
+        return;
+    }
+    else
+    {
+        fprintf(fileSaida, "%.2f\n", aux1);
+        return;
+    }
 }
