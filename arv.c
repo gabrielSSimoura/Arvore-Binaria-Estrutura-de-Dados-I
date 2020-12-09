@@ -117,8 +117,6 @@ Arvore *insereOperadorArvore(Arvore *arvore, char operador)
     return arvore;
 }
 
-//-----------------------------------------------------------------//
-
 Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
 {
     int ehNumero = 0;

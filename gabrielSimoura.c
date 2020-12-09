@@ -14,24 +14,40 @@ int main(int argc, char const *argv[])
         printf("ERRO: O arquivo não foi aberto!\n");
         return 0;
     }
+    FILE *fileSaida = fopen("saida.txt", "w");
+
+    if (fileSaida == NULL)
+    {
+        printf("ERRO: O arquivo de saída não foi aberto!\n");
+        return 0;
+    }
+
+    float resultado;
 
     //Ler a expressão, armazenar array;
     char *expressao = (char *)malloc(sizeof(char) * 300);
-    fscanf(fileEntrada, "%s", expressao);
 
     //Criando Arvore;
-    Arvore *arvore = criaArvore();
+    Arvore *arvore;
 
-    arvore = preencherArvore(arvore, expressao);
+    while (fscanf(fileEntrada, "%s", expressao) != EOF)
+    {
+        resultado = 0.0;
+        arvore = inicializaArvore();
+        arvore = preencherArvore(arvore, expressao);
 
-    //Calculando e imprimindo resultado da equação;
-    printf("%.2f\n", ResultadoExpressao(arvore));
+        //Calculando e imprimindo resultado da equação;
+        resultado = ResultadoExpressao(arvore);
+        fprintf(fileSaida, "%.2f\n", resultado);
+
+        liberaArvore(arvore);
+    }
 
     //Liberando espaço de memória da arvore
 
-    liberaArvore(arvore);
     free(expressao);
     fclose(fileEntrada);
+    fclose(fileSaida);
 
     return 0;
 }
@@ -39,6 +55,11 @@ int main(int argc, char const *argv[])
 Arvore *preencherArvore(Arvore *arvore, char *expressao)
 {
     int posicao = 0;
+
+    if (vaziaArvore(arvore))
+    {
+        arvore = criaArvore();
+    }
 
     arvore = constroiArvore(arvore, expressao, &posicao);
     return arvore;
