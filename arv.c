@@ -2,7 +2,7 @@
 #include "arv.h"
 #include <string.h>
 
-#define INIC -1234
+#define INIC -1
 
 struct arvore
 {
@@ -12,12 +12,23 @@ struct arvore
     struct arvore *direita;
 };
 
-//Cria uma árvore vazia;
+/*Cria uma árvore NULL;
+ *inputs: (void);
+ *outputs: (Arvore*) NULL;
+ *pré-condição: ;
+ *pós-condição: (Arvore*) de retorno existente;
+*/
 Arvore *inicializaArvore(void)
 {
     return NULL;
 }
 
+/*Inicializa uma àrvore;
+ *inputs: (void);
+ *outputs: (Arvore*) devidamente inicializado e alocado;
+ *pré-condição: ;
+ *pós-condição: (Arvore*) de retorno existente;
+*/
 Arvore *criaArvore(void)
 {
     Arvore *arvore = (Arvore *)malloc(sizeof(Arvore));
@@ -29,7 +40,12 @@ Arvore *criaArvore(void)
     return arvore;
 }
 
-//Verifica se o elemento é um operador
+/*Verifica se o elemento é um operador;
+ *inputs: (char);
+ *outputs: (int);
+ *pré-condição: char existente;
+ *pós-condição: int existente;
+*/
 static int verificaOperador(char elemento)
 {
 
@@ -39,7 +55,12 @@ static int verificaOperador(char elemento)
     return 0;
 }
 
-//Verifica se o elemento é um numero
+/*Verifica se o elemento é um numero;
+ *inputs: (char);
+ *outputs: (int);
+ *pré-condição: char existente;
+ *pós-condição: int existente;
+*/
 static int verificaNumero(char elemento)
 {
     if (elemento >= '0' && elemento <= '9')
@@ -49,19 +70,34 @@ static int verificaNumero(char elemento)
     return 0;
 }
 
-//Retorna numero (caso exista) da arvore;
+/*Retorna (caso exista) número da arvore;
+ *inputs: (Arvore*);
+ *outputs: (int);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: int alocado;
+*/
 int retornaNumero(Arvore *arvore)
 {
     return arvore->numero;
 }
 
-//Retorna operador (caso exista) da arvore;
+/*Retorna (caso exista) operador da arvore;
+ *inputs: (Arvore*);
+ *outputs: (char);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: char alocado;
+*/
 char retornaOperador(Arvore *arvore)
 {
     return arvore->info;
 }
 
-//Retorna o status da árvore, se está vazia ou não
+/*Retorna o status da árvore, se está vazia ou não;
+ *inputs: (Arvore*);
+ *outputs: (int);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: int alocado;
+*/
 int vaziaArvore(Arvore *arvore)
 {
     if (arvore == NULL)
@@ -72,7 +108,12 @@ int vaziaArvore(Arvore *arvore)
     return 0;
 }
 
-//Imprime árvore
+/*Imprime árvore;
+ *inputs: (Arvore*);
+ *outputs: (void);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: ;
+*/
 void imprimeArvore(Arvore *arvore)
 {
 
@@ -93,7 +134,12 @@ void imprimeArvore(Arvore *arvore)
     }
 }
 
-//Libera o espaço de memória ocupado pela árvore
+/*Libera o espaço de memória ocupado pela árvore;
+ *inputs: (Arvore*);
+ *outputs: (Arvore*);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: (Arvore*) mddificada;
+*/
 Arvore *liberaArvore(Arvore *arvore)
 {
     if (!vaziaArvore(arvore))
@@ -105,18 +151,36 @@ Arvore *liberaArvore(Arvore *arvore)
     return NULL;
 }
 
+/*Insere determinado numero em uma determinada arvore;
+ *inputs: (Arvore*), (int numero);
+ *outputs: (Arvore*);
+ *pré-condição: (Arvore*) existente, numero como inteiro;
+ *pós-condição: (Arvore*) mddificada, numero inserido;
+*/
 Arvore *insereNumeroArvore(Arvore *arvore, int numero)
 {
     arvore->numero = numero;
     return arvore;
 }
 
+/*Insere determinado operador em uma determinada arvore;
+ *inputs: (Arvore*), (char operador);
+ *outputs: (Arvore*);
+ *pré-condição: (Arvore*) existente, operador como char;
+ *pós-condição: (Arvore*) mddificada, operador inserido;
+*/
 Arvore *insereOperadorArvore(Arvore *arvore, char operador)
 {
     arvore->info = operador;
     return arvore;
 }
 
+/*Constroi a arvore a partir da equação lida, recursivamente;
+ *inputs: (Arvore*), (char *expressão), (int *posição);
+ *outputs: (Arvore*);
+ *pré-condição: (Arvore*) existente, expressão existente, posição existente;
+ *pós-condição: (Arvore*) mddificada, devidamente criada;
+*/
 Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
 {
     int ehNumero = 0;
@@ -124,22 +188,25 @@ Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
     //Se for o parenteses
     if (*(expressao + *posicao) == '(')
     {
-        // Se for o parenteses do número, ex: (100), ou se o número for negativo, ex: (-100)
-        if ((verificaNumero(*(expressao + *posicao + 2) == 1) && *(expressao + *posicao + 1) == '-'))
+        // Se for o parenteses do número, ex: (100);
+        if ((verificaNumero(*(expressao + *posicao + 1) == 1)))
         {
             ehNumero = 1;
             *posicao = *posicao + 1;
         }
 
-        //Se for inicio da expressão
+        //Se for inicio da expressão "(":
         else if (*(expressao + *posicao) == '(')
         {
             *posicao = *posicao + 1;
+
+            //Inicializo a arvore pra esquerda, caso for NULL
             if (vaziaArvore(arvore->esquerda))
             {
                 arvore->esquerda = criaArvore();
             }
 
+            //Crio a arvore pra esquerda;
             arvore->esquerda = constroiArvore(arvore->esquerda, expressao, posicao);
         }
     }
@@ -154,36 +221,23 @@ Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
     //Se for número, ou se for sinal negativo do número;
     if (verificaNumero(*(expressao + *posicao)) || ehNumero)
     {
-        int num = 0, ehNegativo = 0;
-        int c = '\0';
-
-        //Se for negativo;
-        if (*(expressao + *posicao) == '-')
-        {
-            *posicao = *posicao + 1;
-            ehNegativo = 1;
-        }
-
-        while (verificaNumero(*(expressao + *posicao)))
-        {
-            num = num * 10;
-
-            c = *(expressao + *posicao);
-            num = num + (c - '0');
-
-            *posicao = *posicao + 1;
-        }
-
-        if (ehNegativo)
-        {
-            num = num * -1;
-        }
-
-        arvore = insereNumeroArvore(arvore, num);
-        *posicao = *posicao + 1;
-
         ehNumero = 0;
-        ehNegativo = 0;
+        char *num = NULL;
+
+        //Leio a string do numero até o parenteses ")" dele;
+        num = strtok((expressao + *posicao), ")");
+
+        //Insiro o numero na arvore transformando em inteiro;
+        arvore = insereNumeroArvore(arvore, atoi(num));
+
+        //Calculo o tamanho do numero lido,
+        //Para atualizar a posição deleitura da expressao
+        int tamanho = 0;
+        tamanho = strlen(num);
+        tamanho++;
+
+        *posicao = *posicao + tamanho;
+
         return arvore;
     }
 
@@ -193,16 +247,25 @@ Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
         arvore = insereOperadorArvore(arvore, *(expressao + *posicao));
         *posicao = *posicao + 1;
 
+        //Inicializo a arvore pra direita, caso for NULL
         if (vaziaArvore(arvore->direita))
         {
             arvore->direita = criaArvore();
         }
+
+        //Crio a arvore para direita;
         arvore->direita = constroiArvore(arvore->direita, expressao, posicao);
     }
 
     return arvore;
 }
 
+/*Calcula o valor da equação da arvore recebida;
+ *inputs: (Arvore*);
+ *outputs: (float);
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: float de retorno existente;
+*/
 float calculaEquacao(Arvore *arvore)
 {
     float valorEsquerda = 0.0, valorDireita = 0.0;
@@ -224,8 +287,7 @@ float calculaEquacao(Arvore *arvore)
     //Calcular à direita
     valorDireita = calculaEquacao(arvore->direita);
 
-    //Se for operador;
-    //Verificar o operador
+    //Se for operador, calcula;
     if (arvore->info == '+')
     {
         valorEsquerda = valorEsquerda + valorDireita;

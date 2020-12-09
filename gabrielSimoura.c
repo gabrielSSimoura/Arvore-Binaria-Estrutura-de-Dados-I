@@ -2,18 +2,32 @@
 
 #include "arv.h"
 
+/*Preenche uma arvore com a expressao lida;
+ *inputs: (Arvore *arvore), (char *expressao);
+ *outputs: (Arvore*) devidamente inicializado e alocado;
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: (Arvore*) de retorno existente;
+*/
 Arvore *preencherArvore(Arvore *arvore, char *expressao);
+
+/*Calcula a expressao da arvore;
+ *inputs: (Arvore *arvore);
+ *outputs: float ;
+ *pré-condição: (Arvore*) existente;
+ *pós-condição: float de retorno existente;
+*/
 float ResultadoExpressao(Arvore *arvore);
 
 int main(int argc, char const *argv[])
 {
-    FILE *fileEntrada = fopen(argv[1], "r");
+    FILE *fileEntrada = fopen("entrada.txt", "r");
 
     if (fileEntrada == NULL)
     {
         printf("ERRO: O arquivo não foi aberto!\n");
         return 0;
     }
+
     FILE *fileSaida = fopen("saida.txt", "w");
 
     if (fileSaida == NULL)
@@ -40,11 +54,11 @@ int main(int argc, char const *argv[])
         resultado = ResultadoExpressao(arvore);
         fprintf(fileSaida, "%.2f\n", resultado);
 
-        liberaArvore(arvore);
+        //Liberando espaço de memória da arvore;
+        arvore = liberaArvore(arvore);
     }
 
-    //Liberando espaço de memória da arvore
-
+    //Libera espaço de memória utilizado;
     free(expressao);
     fclose(fileEntrada);
     fclose(fileSaida);
