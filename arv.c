@@ -183,16 +183,13 @@ Arvore *insereOperadorArvore(Arvore *arvore, char operador)
 */
 Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
 {
-    int ehNumero = 0;
-
-    //Se for o parenteses
+     //Se for o parenteses
     if (*(expressao + *posicao) == '(')
     {
         // Se for o parenteses do número, ex: (100);
         if ((verificaNumero(*(expressao + *posicao + 1) == 1)))
         {
-            ehNumero = 1;
-            *posicao = *posicao + 1;
+           *posicao = *posicao + 1;
         }
 
         //Se for inicio da expressão "(":
@@ -221,7 +218,6 @@ Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao)
     //Se for número, ou se for sinal negativo do número;
     if (verificaNumero(*(expressao + *posicao)) || ehNumero)
     {
-        ehNumero = 0;
         char *num = NULL;
 
         //Leio a string do numero até o parenteses ")" dele;
