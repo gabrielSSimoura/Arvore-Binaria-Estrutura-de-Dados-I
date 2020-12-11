@@ -2,6 +2,11 @@
 
 #include "arv.h"
 
+/*Gabriel Silva Simoura;
+  Engenharia de Computação;
+  Trabalho 2 - Estrutura de Dados 1;
+*/
+
 /*Preenche uma arvore com a expressao lida;
  *inputs: (Arvore *arvore), (char *expressao);
  *outputs: (Arvore*) devidamente inicializado e alocado;
@@ -18,7 +23,7 @@ Arvore *preencherArvore(Arvore *arvore, char *expressao);
 */
 float ResultadoExpressao(Arvore *arvore);
 
-/*Imprime resultado;
+/*Imprime resultado, evitando erros como float = -0.00;
  *inputs: arquivo de saida, float resultado;
  *outputs: void ;
  *pré-condição: arquivo aberto;

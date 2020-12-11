@@ -1,5 +1,10 @@
-#ifndef ARVORE_H_
-#define ARVORE_H_
+#ifndef ARV_H_
+#define ARV_H_
+
+/*Gabriel Silva Simoura;
+  Engenharia de Computação;
+  Trabalho 2 - Estrutura de Dados 1;
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -95,4 +100,4 @@ Arvore *constroiArvore(Arvore *arvore, char *expressao, int *posicao);
 */
 float calculaEquacao(Arvore *arvore);
 
-#endif /*ARVORE_H_*/
+#endif /*ARV_H_*/
